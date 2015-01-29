@@ -18,6 +18,9 @@ module  config
 
         public static BTN_OK:string = "btn_ok";
 
+        /*方块皮肤*/
+        public static BLOCK_SKIN:string = "block_skin";
+
 
         /**资源组  此值必须 与resource.json 中配置的名称相同  */
         public static RES_GROUP_PROLOAD:string = "preload";

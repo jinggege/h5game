@@ -7,11 +7,12 @@
 	  {"name":"btn_turn","type":"image","url":"assets/btn_turn.png"},
 	  {"name":"btn_down","type":"image","url":"assets/btn_down.png"},
 	  {"name":"btn_ok","type":"image","url":"assets/btn_ok.png"},
-	  {"name":"btn_close","type":"image","url":"assets/btn_close.png"}
+	  {"name":"btn_close","type":"image","url":"assets/btn_close.png"},
+	  {"name":"block_skin","type":"image","url":"assets/blue.png"}
 	],
 
 "groups":
 	[
-        {"name":"preload","keys":"bgImage,btn_left,btn_right,btn_turn,btn_down,btn_ok,btn_close"}
+        {"name":"preload","keys":"bgImage,btn_left,btn_right,btn_turn,btn_down,btn_ok,btn_close,block_skin"}
 	]
 }

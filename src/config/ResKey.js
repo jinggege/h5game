@@ -22,6 +22,6 @@ var config;
         ResKey.RES_GROUP_PROLOAD = "preload";
         return ResKey;
     })();
-    config.ResKey = ResKey;
-    ResKey.prototype.__class__ = "config.ResKey"; //END EXPORT
+    config.ResKey = ResKey; //END EXPORT
 })(config || (config = {})); //end module
+//# sourceMappingURL=ResKey.js.map

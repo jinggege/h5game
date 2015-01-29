@@ -55,9 +55,6 @@ module view.map
         }
 
 
-
-
-
         public getLevel():string{
             return config.UIKey.UI_LEVEL_2;
         }

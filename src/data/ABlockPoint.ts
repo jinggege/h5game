@@ -30,9 +30,7 @@ module data{
 
         public setY(value:number):void{
             this._img.y = value;
-
         }
-
 
         public setXY(x:number,y:number):void{
             this._img.x = x;
@@ -67,11 +65,9 @@ module data{
             return config.GameConfig.BLOCK_HIEGHT;
         }
 
-
         private setTexture():void{
-            //this._img.texture = null;
+            this._img.texture = manage.LoadManage.instance().getTextureByName(config.ResKey.BLOCK_SKIN);
         }
-
 
 
     }//end export
