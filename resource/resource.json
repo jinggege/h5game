@@ -1,0 +1,17 @@
+{
+"resources":
+	[
+	  {"name":"bgImage","type":"image","url":"assets/tetrie_bg.jpg"},
+	  {"name":"btn_left","type":"image","url":"assets/btn_left.png"},
+	  {"name":"btn_right","type":"image","url":"assets/btn_right.png"},
+	  {"name":"btn_turn","type":"image","url":"assets/btn_turn.png"},
+	  {"name":"btn_down","type":"image","url":"assets/btn_down.png"},
+	  {"name":"btn_ok","type":"image","url":"assets/btn_ok.png"},
+	  {"name":"btn_close","type":"image","url":"assets/btn_close.png"}
+	],
+
+"groups":
+	[
+        {"name":"preload","keys":"bgImage,btn_left,btn_right,btn_turn,btn_down,btn_ok,btn_close"}
+	]
+}

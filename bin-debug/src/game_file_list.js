@@ -1,0 +1,19 @@
+var game_file_list = [
+    "view/background/BackgroundV.js",
+    "view/controlbar/ContrilBarV.js",
+    "view/loading/LoadingV.js",
+    "mevent/NoticeData.js",
+    "config/ResKey.js",
+    "manage/EventManage.js",
+    "mevent/EventType.js",
+    "config/UIKey.js",
+    "manage/LoadManage.js",
+    "util/Util.js",
+    "view/background/BackgroundC.js",
+    "view/controlbar/ControlBarC.js",
+    "view/loading/LoadingC.js",
+    "manage/DataModuleManage.js",
+    "manage/UIManage.js",
+    "Tetrie.js",
+    "config/GameConfig.js"
+];
