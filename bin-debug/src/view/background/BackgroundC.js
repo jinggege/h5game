@@ -22,7 +22,14 @@ var view;
             BackgroundC.prototype.open = function () {
                 if (_super.prototype.getBgimg.call(this).texture == undefined) {
                     _super.prototype.getBgimg.call(this).texture = manage.LoadManage.instance().getTextureByName(config.ResKey.GAME_BG_NAME);
+                    _super.prototype.getBtnStart.call(this).texture = manage.LoadManage.instance().getTextureByName(config.ResKey.BTN_OK);
+                    _super.prototype.getBtnStart.call(this).addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartHandler, this);
                 }
+            };
+            BackgroundC.prototype.clickStartHandler = function (event) {
+                _super.prototype.getBtnStart.call(this).visible = false;
+                manage.EventManage.instance().dispatcher(mevent.EventType.N_OPEN_UI, config.UIKey.UI_MAP);
+                manage.EventManage.instance().dispatcher(mevent.EventType.N_OPEN_UI, config.UIKey.UI_CONTROL);
             };
             BackgroundC.prototype.getLevel = function () {
                 return config.UIKey.UI_LEVEL_1;
@@ -32,7 +39,7 @@ var view;
             BackgroundC.prototype.destroy = function () {
             };
             return BackgroundC;
-        })(background.BackgroundV);
+        })(view.background.BackgroundV);
         background.BackgroundC = BackgroundC;
         BackgroundC.prototype.__class__ = "view.background.BackgroundC"; //end export
     })(background = view.background || (view.background = {}));

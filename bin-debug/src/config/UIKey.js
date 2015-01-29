@@ -13,7 +13,22 @@ var config;
         UIKey.UI_LOADING = "ui_loading";
         UIKey.UI_BG = "ui_bg";
         UIKey.UI_CONTROL = "ui_control";
-        /**=====================层级配置================================*/
+        /**map*/
+        UIKey.UI_MAP = "UI_MAP";
+        /**=====================层级配置================================
+         *层级示意图   采用文件夹结构管理
+         *  root-
+         *       level_1-
+         *              level_1_1
+         *              level_1_2
+         *       level_2
+         *              level_2_1
+         *              level_2_2
+         *                      level_2_2_1
+         *                      level_2_2_2
+         *       level3-
+         *
+         **************************************************************/
         /**层级 背景*/
         UIKey.UI_LEVEL_1 = "1";
         /**层级 map*/

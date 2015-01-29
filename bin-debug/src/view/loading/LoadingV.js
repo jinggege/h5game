@@ -25,13 +25,9 @@ var view;
                 this._tf.text = "Loading View open";
                 this.addChild(this._tf);
             };
-            Object.defineProperty(LoadingV.prototype, "label", {
-                get: function () {
-                    return this._tf;
-                },
-                enumerable: true,
-                configurable: true
-            });
+            LoadingV.prototype.label = function () {
+                return this._tf;
+            };
             return LoadingV;
         })(egret.Sprite);
         loading.LoadingV = LoadingV;

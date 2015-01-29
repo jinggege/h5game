@@ -25,8 +25,8 @@ var manage;
          * @param callback  回调函数
          */
         EventManage.prototype.removeList = function (eventType, callback) {
-            if (this._callbackDic[eventType] != undefined) {
-                var arr = this._callbackDic[eventType];
+            var arr = this._callbackDic[eventType];
+            if (arr != undefined && arr != null) {
                 for (var i = 0; i < arr.length; i++) {
                     if (arr[i] == callback) {
                         arr.splice(i, 1);
@@ -41,9 +41,10 @@ var manage;
          * @param data：暑假
          */
         EventManage.prototype.dispatcher = function (evnetType, data) {
+            if (data === void 0) { data = null; }
             var nData = new mevent.NoticeData(evnetType, data);
-            if (this._callbackDic[evnetType] != undefined) {
-                var arr = this._callbackDic[evnetType];
+            var arr = this._callbackDic[evnetType];
+            if (arr != undefined && arr != null) {
                 for (var i = 0; i < arr.length; i++) {
                     arr[i].call(null, nData);
                 }

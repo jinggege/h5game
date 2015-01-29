@@ -9,6 +9,7 @@ var manage;
         }
         DataModuleManage.prototype.start = function () {
             this._dataDic = {};
+            this.addDataModule(config.DataModuleKey.M_DATA_MAP, new data.MapData());
         };
         /**
          * 添加data 模块到存储列表

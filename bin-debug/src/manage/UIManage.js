@@ -27,15 +27,16 @@ var manage;
             this._uiDic[config.UIKey.UI_LOADING] = new view.loading.LoadingC();
             this._uiDic[config.UIKey.UI_BG] = new view.background.BackgroundC();
             this._uiDic[config.UIKey.UI_CONTROL] = new view.controlbar.ControlBarC();
+            this._uiDic[config.UIKey.UI_MAP] = new view.map.MapC();
             manage.EventManage.instance().addListener(mevent.EventType.N_OPEN_UI, this.operateUiHandler);
         };
         UIManage.prototype.operateUiHandler = function (nData) {
             switch (nData.type) {
                 case mevent.EventType.N_OPEN_UI:
-                    this.openUI(nData.data);
+                    manage.UIManage.instance().openUI(nData.data);
                     break;
                 case mevent.EventType.N_CLOSE_UI:
-                    this.closeUI(nData.data);
+                    manage.UIManage.instance().closeUI(nData.data);
                     break;
             }
         };
@@ -48,8 +49,9 @@ var manage;
             var ui = this._uiDic[uikey];
             if (ui != undefined) {
                 ui.open();
-                var panel = ui;
-                this._levelDic[ui.getLevel()].addChild(panel);
+                //var panel:egret.Sprite = <egret.Sprite>ui;
+                var panel = this._uiDic[uikey];
+                this.getLayer(ui.getLevel()).addChild(panel);
             }
             else {
                 util.Console.log([uikey + " 未被注册!"]);
@@ -67,9 +69,10 @@ var manage;
             var ui = this._uiDic[uikey];
             if (ui != undefined) {
                 ui.close();
-                var panel = ui;
+                //var panel:egret.Sprite = <egret.Sprite>ui;
+                var panel = this._uiDic[uikey];
                 if (this._mainLayer.contains(panel)) {
-                    this._levelDic[ui.getLevel()].removeChild(panel);
+                    this.getLayer(ui.getLevel()).removeChild(panel);
                 }
             }
             else {
@@ -86,7 +89,7 @@ var manage;
             this._mainLayer.addChild(layer);
             this._levelDic[level] = layer;
         };
-        UIManage.prototype.getLayerByName = function (name) {
+        UIManage.prototype.getLayer = function (name) {
             var layer = this._levelDic[name];
             if (layer == undefined || layer == null) {
                 util.Console.log(["层级:" + name + " 未被创建!"]);

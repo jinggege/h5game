@@ -15,6 +15,7 @@ var config;
         ResKey.BTN_RIGHT = "btn_right";
         ResKey.BTN_TURN = "btn_turn";
         ResKey.BTN_DOWN = "btn_down";
+        ResKey.BTN_OK = "btn_ok";
         /**资源组  此值必须 与resource.json 中配置的名称相同  */
         ResKey.RES_GROUP_PROLOAD = "preload";
         return ResKey;

@@ -12,6 +12,7 @@ var Tetrie = (function (_super) {
     function Tetrie() {
         _super.call(this);
         this.addEventListener(egret.Event.ADDED_TO_STAGE, this.addToStageHandler, this);
+        util.Console.log(["V_2"]);
     }
     /**
      * 添加到舞台
@@ -30,7 +31,7 @@ var Tetrie = (function (_super) {
      * 预加载完毕后回调
      */
     Tetrie.prototype.preLoadComplete = function (data) {
-        manage.UIManage.instance().openUI(config.UIKey.UI_BG);
+        manage.EventManage.instance().dispatcher(mevent.EventType.N_OPEN_UI, config.UIKey.UI_BG);
     };
     return Tetrie;
 })(egret.DisplayObjectContainer);

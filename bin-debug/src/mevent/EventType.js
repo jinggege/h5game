@@ -14,6 +14,7 @@ var mevent;
         EventType.N_CLOSE_UI = "N_CLOSE_UI";
         /**加载完成*/
         EventType.N_LOAD_COMPLETE = "N_LOAD_COMPLETE";
+        EventType.N_CHANGE_DIRECTION = "N_CHANGE_DIRECTION";
         return EventType;
     })();
     mevent.EventType = EventType;

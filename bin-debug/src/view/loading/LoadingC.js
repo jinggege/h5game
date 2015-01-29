@@ -26,9 +26,11 @@ var view;
                 return config.UIKey.UI_LEVEL_3;
             };
             LoadingC.prototype.close = function () {
-                if (this.contains(_super.prototype.label)) {
-                    this.removeChild(_super.prototype.label);
+                /*
+                if(this.contains(super.label)){
+                    this.removeChild(super.label);
                 }
+                */
             };
             LoadingC.prototype.destroy = function () {
             };

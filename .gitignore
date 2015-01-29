@@ -1,0 +1,6 @@
+*.swp
+.idea/
+bin-debug/
+launcher/
+libs/
+.DS_Store

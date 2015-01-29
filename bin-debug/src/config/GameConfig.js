@@ -11,6 +11,18 @@ var config;
         GameConfig.STAGE_MAIN_WIDTH = 300;
         /**舞台最小高度*/
         GameConfig.STAGE_MAIN_HEIGHT = 500;
+        /**地图配置*/
+        /**最大行数*/
+        GameConfig.MAP_MAX_ROW = 15;
+        /**最大列数*/
+        GameConfig.MAP_MAX_COL = 10;
+        GameConfig.BLOCK_WIDTH = 30;
+        GameConfig.BLOCK_HIEGHT = 30;
+        /**direction config*/
+        GameConfig.DIR_LEFT = "DIR_LEFT";
+        GameConfig.DIR_RIGT = "DIR_RIGT";
+        GameConfig.DIR_DOWN = "DIR_DOWN";
+        GameConfig.DIR_TURN = "DIR_TURN";
         return GameConfig;
     })();
     config.GameConfig = GameConfig;
