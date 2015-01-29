@@ -25,7 +25,6 @@ module view.background{
                 super.getBgimg().texture = manage.LoadManage.instance().getTextureByName(config.ResKey.GAME_BG_NAME);
                 super.getBtnStart().texture = manage.LoadManage.instance().getTextureByName(config.ResKey.BTN_OK);
                 super.getBtnStart().addEventListener(egret.TouchEvent.TOUCH_TAP,this.clickStartHandler,this)
-
             }
 
         }
