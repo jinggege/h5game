@@ -5,10 +5,11 @@ module view.map
 {
     export class MapC extends MapV implements i.IUIControl
     {
-
-        private _timer:egret.Timer;
         private _curABlockInfo:data.ActiveBlockInfo;
         private _curcheckL:Array<data.CheckPoint>;
+        private _curTime:number = 0;
+        private _lastTime:number = 0;
+        private _delay:number = 500;
         public constructor(){
             super();
             this.init();
@@ -20,9 +21,7 @@ module view.map
 
         public open():void{
             this.createBrick();
-            this._timer = new egret.Timer(500);
             this.addEvent();
-            this._timer.start();
         }
 
         public createBrick():void{
@@ -32,10 +31,20 @@ module view.map
 
         private addEvent():void{
             manage.EventManage.instance().addListener(mevent.EventType.N_CHANGE_DIRECTION,this.changeDirctionHandler);
-            this._timer.addEventListener(egret.TimerEvent.TIMER, this.enterFrame, this);
+            egret.Ticker.getInstance().register(this.enterFrame,this);
+            egret.Ticker.getInstance().run();
+
+            this._lastTime = new Date().getTime();
+
         }
 
         private enterFrame():void{
+            this._curTime = new Date().getTime();
+            if(this._curTime - this._lastTime < 500){
+                return;
+            }else{
+                this._lastTime = this._curTime;
+            }
             this._curABlockInfo.updata();
             this._curcheckL = this._curABlockInfo.getCheckList();
 
@@ -50,8 +59,6 @@ module view.map
 
             this.checkHit("down")
         }
-
-
 
 
         //检测碰撞
@@ -174,21 +181,33 @@ module view.map
         }
 
         private changeDirctionHandler(event:mevent.NoticeData):void{
+            var moveType = "down"
+            var isHit = false;
             switch (event.data){
-
                 case config.GameConfig.DIR_LEFT:
-
+                    moveType = "left";
+                    isHit = this.checkHit(moveType);
+                    if(!isHit){
+                        this._curABlockInfo.setDirLeft();
+                    }
                     break;
                 case config.GameConfig.DIR_RIGT:
-
+                    moveType = "right";
+                    isHit = this.checkHit(moveType);
+                    if(!isHit){
+                        this._curABlockInfo.setDirLeft();
+                    }
                     break;
                 case config.GameConfig.DIR_TURN:
-
+                    moveType = "turn";
                     break;
                 case config.GameConfig.DIR_DOWN:
-
+                    moveType = 'down';
+                    isHit = this.checkHit(moveType);
                     break;
             }
+
+
         }
 
         //检测游戏结束
@@ -204,6 +223,8 @@ module view.map
 
             if(isLost){
                 // gameOver 重新开始
+               egret.Ticker.getInstance().pause();
+                egret.Ticker.getInstance().unregister(this.enterFrame,this);
             }
         }
 
