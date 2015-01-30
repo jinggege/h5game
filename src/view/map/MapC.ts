@@ -61,6 +61,8 @@ module view.map
             for(var i:number = 0; i<this._curcheckL.length;i++){
                 brickX = this._curcheckL[i].getCol();
                 brickY = this._curcheckL[i].getRow();
+                console.log('brickX--------'+brickX);
+                console.log('brickY--------'+brickY);
 
                 switch(moveType){
                     case "left":
@@ -70,6 +72,7 @@ module view.map
                         isHit = this.checkCell(brickX+1,brickY,'hitR');
                         break;
                     case "down":
+
                         isHit = this.checkCell(brickX,brickY+1,'hitD');
                         //触底
                         if(isHit) {
@@ -108,18 +111,17 @@ module view.map
         private checkCell(i:number,j:number, hitType:string):boolean{
             switch (hitType){
                 case "hitL":
-                    if(j<0){
+                    if(i<0 || this.blockDic[i.toString()+j] == null){
                         return true;
                     }
                     break;
                 case "hitR":
-                    if(j >= config.GameConfig.MAP_MAX_COL){
+                    if(i >= config.GameConfig.MAP_MAX_COL || this.blockDic[i.toString()+j] == null){
                         return true;
                     }
                     break;
                 case "hitD":
-                    console.log(i);
-                    if(i>= config.GameConfig.MAP_MAX_ROW){
+                    if(j>= config.GameConfig.MAP_MAX_ROW || this.blockDic[i.toString()+j] == null){
                         return true;
                     }
                     break;
@@ -127,7 +129,7 @@ module view.map
                     break;
             }
 
-            if(this.blockDic[i.toString()+j].getBlockInfo().getBlock() == 1){
+            if(this.blockDic[i.toString()+j].block == 1){
                 return true;
             }
 
@@ -135,8 +137,6 @@ module view.map
         }
 
         private changeDirctionHandler(event:mevent.NoticeData):void{
-
-            util.Console.log([event.data]);
             switch (event.data){
 
                 case config.GameConfig.DIR_LEFT:
@@ -153,10 +153,6 @@ module view.map
                     break;
             }
         }
-
-
-
-
 
 
 
