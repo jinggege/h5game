@@ -204,6 +204,8 @@ module view.map
 
             if(isLost){
                 // gameOver 重新开始
+                this._timer.stop();
+                this._timer.removeEventListener(egret.TimerEvent.TIMER, this.enterFrame, this);
             }
         }
 
