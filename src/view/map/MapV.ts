@@ -21,11 +21,8 @@ module view.map
             }
 
 
-            this._row = config.GameConfig.STAGE_MAIN_HEIGHT / config.GameConfig.BLOCK_HIEGHT;
-            this._row = this._row > config.GameConfig.MAP_MAX_ROW ? config.GameConfig.MAP_MAX_ROW : this._row;
-
-            this._col = config.GameConfig.STAGE_MAIN_WIDTH / config.GameConfig.BLOCK_WIDTH;
-            this._col = this._col > config.GameConfig.MAP_MAX_COL ? config.GameConfig.MAP_MAX_COL : this._col;
+            this._row = config.GameConfig.MAP_MAX_ROW;
+            this._col = config.GameConfig.MAP_MAX_COL;
 
             this.initView();
         }
@@ -41,6 +38,8 @@ module view.map
                     this.addChild(block);
                 }
             }
+
+            util.Console.log([this._blockDic]);
         }
 
         get mapData():data.MapData{

@@ -142,6 +142,8 @@ module data{
             var aPoint:data.ABlockPoint = null;
             var globalRow:number = 0;
             var globalCol:number = 0;
+
+
             for(var row:number=0; row<this._ablockMap.length; row++){
                 globalRow = row+this.getRowForGlobal();
                 arrPoint = this._ablockMap[row];

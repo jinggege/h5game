@@ -21,13 +21,25 @@ module view.map{
             return this._blockInfo;
         }
 
-        public setBlockInfo(value:data.BlockInfo):void{
-            this._blockInfo = value;
+        set block(value:number){
+            this._blockInfo.setBlock(value);
             if(this._blockInfo.getBlock() == 1){
                 this._blockSkin.visible = true;
             }else{
                 this._blockSkin.visible = false;
             }
+        }
+
+        get block():number{
+            return this._blockInfo.getBlock();
+        }
+
+        get row():number{
+            return this._blockInfo.getRow();
+        }
+
+        get col():number{
+            return this._blockInfo.getCol();
         }
 
         get color():number{

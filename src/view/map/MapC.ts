@@ -19,11 +19,15 @@ module view.map
         }
 
         public open():void{
-            this._curABlockInfo = this.mapData.creatActiveBlock();
-            this.addChild(this._curABlockInfo.getBody());
+            this.createBrick();
             this._timer = new egret.Timer(500);
             this.addEvent();
             this._timer.start();
+        }
+
+        public createBrick():void{
+            this._curABlockInfo = this.mapData.creatActiveBlock();
+            this.addChild(this._curABlockInfo.getBody());
         }
 
         private addEvent():void{
@@ -44,41 +48,34 @@ module view.map
                 col += " "+this._curcheckL[i].getCol();
             }
 
-            util.Console.log(["ROW=>",str]);
-            util.Console.log(["COL=>",col]);
-
-
-            //this.checkHit("down")
+            this.checkHit("down")
         }
 
-        //砖块模型里的形状更新到场景中
-        private  updateToScene():void{
-            var brickX = 0,brickY = 0;
-            for(var i:number = 0; i<this._curcheckL.length;i++){
-                brickX = this._curcheckL[i].getCol();
-                brickY = this._curcheckL[i].getRow();
-                this.blockDic[brickX.toString()+brickY].setBlockInfo(new data.BlockInfo(brickX,brickY,1));
-            }
-        }
+
 
 
         //检测碰撞
         private  checkHit(moveType:string):boolean{
-            var brickX = 0,brickY = 0;
+            var brickRow = 0,brickCol = 0;
             var isHit:boolean =false;
             for(var i:number = 0; i<this._curcheckL.length;i++){
-                brickX = this._curcheckL[i].getCol();
-                brickY = this._curcheckL[i].getRow();
+                brickRow = this._curcheckL[i].getRow();
+                brickCol = this._curcheckL[i].getCol();
 
                 switch(moveType){
                     case "left":
-                        isHit = this.checkCell(brickX-1,brickY,'hitL');
+                        isHit = this.checkCell(brickRow,brickCol-1,'hitL');
                         break;
                     case "right":
-                        isHit = this.checkCell(brickX+1,brickY,'hitR');
+                        isHit = this.checkCell(brickRow,brickCol+1,'hitR');
                         break;
                     case "down":
-                        isHit = this.checkCell(brickX,brickY+1,'hitD');
+
+                        isHit = this.checkCell(brickRow+1,brickCol,'hitD');
+                        //触底
+                        if(isHit) {
+                            this.floor();
+                        }
                         break;
                     default :
                         break;
@@ -92,21 +89,23 @@ module view.map
             return isHit
         }
 
+
+
         //检测该单元格是否可以移动
         private checkCell(i:number,j:number, hitType:string):boolean{
             switch (hitType){
                 case "hitL":
-                    if(j<0){
+                    if(j<0 || this.blockDic[i.toString()+j] == null){
                         return true;
                     }
                     break;
                 case "hitR":
-                    if(j >= config.GameConfig.MAP_MAX_COL){
+                    if(j >= config.GameConfig.MAP_MAX_COL || this.blockDic[i.toString()+j] == null){
                         return true;
                     }
                     break;
                 case "hitD":
-                    if(i>= config.GameConfig.MAP_MAX_ROW){
+                    if(i>= config.GameConfig.MAP_MAX_ROW || this.blockDic[i.toString()+j] == null){
                         return true;
                     }
                     break;
@@ -114,16 +113,32 @@ module view.map
                     break;
             }
 
-            if(this.blockDic[i.toString()+j].getBlockInfo().getBlock() == 1){
+            if(this.blockDic[i.toString()+j].block == 1){
                 return true;
             }
 
             return false;
         }
 
-        private changeDirctionHandler(event:mevent.NoticeData):void{
+        private floor():void{
+            this._curABlockInfo.setIsDie(true);
+            this.updateToScene();
+            this._curABlockInfo.destroy();
 
-            util.Console.log([event.data]);
+            this.createBrick();
+        }
+
+        //砖块模型里的形状更新到场景中
+        private  updateToScene():void{
+            var brickX = 0,brickY = 0;
+            for(var i:number = 0; i<this._curcheckL.length;i++){
+                brickX = this._curcheckL[i].getRow();
+                brickY = this._curcheckL[i].getCol();
+                this.blockDic[brickX.toString()+brickY].block = 1;
+            }
+        }
+
+        private changeDirctionHandler(event:mevent.NoticeData):void{
             switch (event.data){
 
                 case config.GameConfig.DIR_LEFT:
@@ -140,10 +155,6 @@ module view.map
                     break;
             }
         }
-
-
-
-
 
 
 
