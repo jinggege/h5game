@@ -69,7 +69,7 @@ module data{
 
 
         public setDirRight():void{
-            this._body.y -= config.GameConfig.BLOCK_WIDTH;
+            this._body.x += config.GameConfig.BLOCK_WIDTH;
         }
 
 
