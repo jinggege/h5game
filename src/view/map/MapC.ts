@@ -10,9 +10,12 @@ module view.map
         private _curTime:number = 0;
         private _lastTime:number = 0;
         private _delay:number = 500;
+
+        static _self:MapC ;
         public constructor(){
             super();
             this.init();
+            MapC._self = this;
         }
 
         public init():void{
@@ -186,16 +189,16 @@ module view.map
             switch (event.data){
                 case config.GameConfig.DIR_LEFT:
                     moveType = "left";
-                    isHit = this.checkHit(moveType);
+                    isHit = MapC._self.checkHit(moveType);
                     if(!isHit){
-                        this._curABlockInfo.setDirLeft();
+                        MapC._self._curABlockInfo.setDirLeft();
                     }
                     break;
                 case config.GameConfig.DIR_RIGT:
                     moveType = "right";
-                    isHit = this.checkHit(moveType);
+                    isHit = MapC._self.checkHit(moveType);
                     if(!isHit){
-                        this._curABlockInfo.setDirLeft();
+                        MapC._self._curABlockInfo.setDirRight();
                     }
                     break;
                 case config.GameConfig.DIR_TURN:
@@ -203,7 +206,7 @@ module view.map
                     break;
                 case config.GameConfig.DIR_DOWN:
                     moveType = 'down';
-                    isHit = this.checkHit(moveType);
+                    isHit = MapC._self.checkHit(moveType);
                     break;
             }
 
