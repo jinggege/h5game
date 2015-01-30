@@ -13,6 +13,9 @@ module data
 
         private  _map_tian:any = null;
 
+        /**当前活动的块 占有的列数*/
+        private  _currOwnCol:number = 0;
+
         public constructor(){
         }
 
@@ -81,12 +84,12 @@ module data
          */
 
         public creatActiveBlock():data.ActiveBlockInfo{
-
             var aBlock:data.ActiveBlockInfo = new data.ActiveBlockInfo();
             aBlock.setActiveBlockType(data.MapData.A_TYPE_田);
             aBlock.setABlockMap(this.getActiceMapData(data.MapData.A_TYPE_田));
-            //Math.random()
-
+            var randomCol:number = Math.floor((config.GameConfig.MAP_MAX_COL - this._currOwnCol) *Math.random());
+            var randomX:number  = randomCol * config.GameConfig.BLOCK_WIDTH;
+            aBlock.setXY(randomX,0);
             return aBlock;
         }
 
@@ -128,6 +131,8 @@ module data
             this._map_tian = [];
             this._map_tian.push([this.getPoint(0,0,1), this.getPoint(0,1,1)]);
             this._map_tian.push([this.getPoint(1,0,1), this.getPoint(1,1,1)]);
+
+            this._currOwnCol = 2;
             return this._map_tian;
         }
 

@@ -18,7 +18,6 @@ module data{
         private _checkList:Array<data.CheckPoint> = null;
 
 
-
         public constructor(){
             this._body  = new egret.Sprite();
             this._checkList = new Array<data.CheckPoint>();
