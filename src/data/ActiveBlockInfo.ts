@@ -12,7 +12,6 @@ module data{
 
         private _body:egret.Sprite;
 
-        private _checkList:Array<data.CheckPoint>;
         private _speedX:number = 30;
         private _speedY:number = 30;
 
@@ -21,7 +20,6 @@ module data{
         public constructor(){
             this._body  = new egret.Sprite();
 
-            this._checkList = new Array<data.CheckPoint>();
         }
 
         public setActiveBlockType(aType:string):void{
@@ -106,7 +104,6 @@ module data{
         public updata():void{
             if(this._isDie) return;
             this._body.y+= this._speedY;
-
         }
 
 
@@ -116,7 +113,7 @@ module data{
          * @returns {number}
          */
         private getRowForGlobal():number{
-            return this.getX()/config.GameConfig.BLOCK_HIEGHT;
+            return this.getY()/config.GameConfig.BLOCK_HIEGHT;
         }
 
         /**
@@ -124,7 +121,7 @@ module data{
          * @returns {number}
          */
         private getColForGlobal():number{
-            return this.getY()/config.GameConfig.BLOCK_WIDTH;
+            return this.getX()/config.GameConfig.BLOCK_WIDTH;
         }
 
 
@@ -134,9 +131,7 @@ module data{
          */
         public getCheckList():any{
 
-            if(this._checkList.length != 0){
-                return this._checkList;
-            }
+            var checkList:Array<data.CheckPoint> = new Array<data.CheckPoint>();
 
             var arrPoint:Array<data.ABlockPoint> = null;
             var aPoint:data.ABlockPoint = null;
@@ -149,11 +144,14 @@ module data{
                 for(var col:number=0; col<arrPoint.length;col++){
                     globalCol = col + this.getColForGlobal();
                     aPoint = arrPoint[col];
-                    this._checkList.push(new data.CheckPoint(globalRow,globalCol,aPoint.getBlock()));
+                    checkList.push(new data.CheckPoint(globalRow,globalCol,aPoint.getBlock()));
                 }
             }
 
-            return this._checkList;
+            util.Console.log([checkList]);
+
+
+            return checkList;
         }
 
 
@@ -166,12 +164,6 @@ module data{
                 this._body = null;
             }
 
-            if(this._checkList!= null  ){
-                while(this._checkList.length){
-                    this._checkList[0] = null;
-                    this._checkList.splice(0,1);
-                }
-            }
 
             this._ablockMap  = null;
 

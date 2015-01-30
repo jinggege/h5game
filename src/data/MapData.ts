@@ -84,8 +84,9 @@ module data
 
             var aBlock:data.ActiveBlockInfo = new data.ActiveBlockInfo();
             aBlock.setActiveBlockType(data.MapData.A_TYPE_田);
-            console.log(this.getActiceMapData(data.MapData.A_TYPE_田))
             aBlock.setABlockMap(this.getActiceMapData(data.MapData.A_TYPE_田));
+            //Math.random()
+
             return aBlock;
         }
 
