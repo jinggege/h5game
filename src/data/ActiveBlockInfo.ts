@@ -61,6 +61,18 @@ module data{
             return this._body;
         }
 
+
+        public setDirLeft():void{
+            this._body.x -= config.GameConfig.BLOCK_WIDTH;
+
+        }
+
+
+        public setDirRight():void{
+            this._body.y -= config.GameConfig.BLOCK_WIDTH;
+        }
+
+
         /**
          * 是否死亡
          * @param value
