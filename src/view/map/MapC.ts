@@ -132,7 +132,7 @@ module view.map
         //检测消除行
         private checkLine():void{
             var canClear:boolean = false;
-            for(var i:number = config.GameConfig.MAP_MAX_ROW; i>=0; i--){
+            for(var i:number = config.GameConfig.MAP_MAX_ROW-1; i>=0; i--){
                 canClear = true;
                 for(var j:number = 0; j<config.GameConfig.MAP_MAX_COL; j++){
                     if(this.blockDic[i.toString()+j].block !=1){
