@@ -34,7 +34,21 @@ module view.map
         private enterFrame():void{
             this._curABlockInfo.updata();
             this._curcheckL = this._curABlockInfo.getCheckList();
-            this.checkHit("down")
+
+            var str:string = "";
+            var col:string = "";
+
+            for(var i:number =0; i<this._curcheckL.length; i++){
+
+                str+=" "+this._curcheckL[i].getRow();
+                col += " "+this._curcheckL[i].getCol();
+            }
+
+            util.Console.log(["ROW=>",str]);
+            util.Console.log(["COL=>",col]);
+
+
+            //this.checkHit("down")
         }
 
         //砖块模型里的形状更新到场景中

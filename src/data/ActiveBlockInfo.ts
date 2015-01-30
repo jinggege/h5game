@@ -15,10 +15,13 @@ module data{
         private _speedX:number = 30;
         private _speedY:number = 30;
 
+        private _checkList:Array<data.CheckPoint> = null;
+
 
 
         public constructor(){
             this._body  = new egret.Sprite();
+            this._checkList = new Array<data.CheckPoint>();
 
         }
 
@@ -128,30 +131,37 @@ module data{
         /**
          * 要检测的点
          * @returns {Array<data.CheckPoint>}
+         *
          */
         public getCheckList():any{
 
-            var checkList:Array<data.CheckPoint> = new Array<data.CheckPoint>();
+            while(this._checkList.length){
+                this._checkList.pop();
+            }
 
             var arrPoint:Array<data.ABlockPoint> = null;
             var aPoint:data.ABlockPoint = null;
             var globalRow:number = 0;
             var globalCol:number = 0;
-
             for(var row:number=0; row<this._ablockMap.length; row++){
                 globalRow = row+this.getRowForGlobal();
                 arrPoint = this._ablockMap[row];
                 for(var col:number=0; col<arrPoint.length;col++){
                     globalCol = col + this.getColForGlobal();
                     aPoint = arrPoint[col];
-                    checkList.push(new data.CheckPoint(globalRow,globalCol,aPoint.getBlock()));
+                    this._checkList.push(new data.CheckPoint(globalRow,globalCol,aPoint.getBlock()));
                 }
             }
 
-            util.Console.log([checkList]);
 
+            var str:string = "";
+            for(var i:number = 0; i<this._checkList.length; i++){
 
-            return checkList;
+                str+=" "+this._checkList[i].getRow()
+            }
+
+            util.Console.log([str]);
+            return this._checkList;
         }
 
 
