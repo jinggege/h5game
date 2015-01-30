@@ -10,13 +10,12 @@ module view.map{
         private _lineColor:number = 0xffffff;
         private _al:number  = 1;
 
-        public constructor(row:number,col:number,block:number) {
+        public constructor(blockInfo:data.BlockInfo) {
             super();
             this._blockSkin = new egret.Bitmap();
-            this._blockInfo = new data.BlockInfo(row, col, block);
+            this._blockInfo = blockInfo;
             this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
         }
-
 
         public getBlockInfo():data.BlockInfo{
             return this._blockInfo;
@@ -24,14 +23,19 @@ module view.map{
 
         public setBlockInfo(value:data.BlockInfo):void{
             this._blockInfo = value;
+            if(this._blockInfo.getBlock() == 1){
+                this._blockSkin.visible = true;
+            }else{
+                this._blockSkin.visible = false;
+            }
         }
 
-        public getColor():number{
+        get color():number{
             return this._color;
         }
 
-        public setColor(value:number):void{
-            this._color =value;
+        set color(value:number){
+            this._color = value;
         }
 
         private onAddToStage():void{
@@ -41,12 +45,14 @@ module view.map{
         }
 
         private createChild():void{
-
+            this.addChild(this._blockSkin);
+            this._blockSkin.width = config.GameConfig.BLOCK_WIDTH;
+            this._blockSkin.height = config.GameConfig.BLOCK_HIEGHT;
+            this._blockSkin.texture = manage.LoadManage.instance().getTextureByName(config.ResKey.BLOCK_SKIN);
             if(this._blockInfo.getBlock() == 1){
-                this.addChild(this._blockSkin);
-                this._blockSkin.width = config.GameConfig.BLOCK_WIDTH;
-                this._blockSkin.height = config.GameConfig.BLOCK_HIEGHT;
-                this._blockSkin.texture = manage.LoadManage.instance().getTextureByName(config.ResKey.BLOCK_SKIN);
+                this._blockSkin.visible = true;
+            }else{
+                this._blockSkin.visible = false;
             }
 
             this.x = this._blockInfo.getCol() * config.GameConfig.BLOCK_WIDTH;

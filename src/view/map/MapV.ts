@@ -8,8 +8,18 @@ module view.map
         private _blockDic = new Object();
         private _row:number;
         private _col:number;
+        private _mapData:data.MapData;
+        private _mapDic:Object;
         public constructor(){
             super();
+
+            this._mapData = <data.MapData>(manage.DataModuleManage.instance().getDataModule(config.DataModuleKey.M_DATA_MAP));
+            this. _mapDic = this._mapData.getMapData();
+            if(this._mapDic == null){
+                this._mapData.creatData();
+                this._mapDic = this._mapData.getMapData();
+            }
+
 
             this._row = config.GameConfig.STAGE_MAIN_HEIGHT / config.GameConfig.BLOCK_HIEGHT;
             this._row = this._row > config.GameConfig.MAP_MAX_ROW ? config.GameConfig.MAP_MAX_ROW : this._row;
@@ -26,11 +36,23 @@ module view.map
             var block:Block = null;
             for(i = 0; i<this._row; i++){
                 for( j = 0; j<this._col; j++){
-                    block = new Block(i, j, 1);
+                    block = new Block(this._mapDic[i.toString()][j]);
                     this._blockDic[i.toString()+j] = block;
                     this.addChild(block);
                 }
             }
+        }
+
+        get mapData():data.MapData{
+            return this._mapData;
+        }
+
+        get mapDic():Object{
+            return this._mapDic;
+        }
+
+        get blockDic():Object{
+            return this._blockDic;
         }
     }
 }
