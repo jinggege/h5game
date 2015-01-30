@@ -51,15 +51,7 @@ module view.map
             //this.checkHit("down")
         }
 
-        //砖块模型里的形状更新到场景中
-        private  updateToScene():void{
-            var brickX = 0,brickY = 0;
-            for(var i:number = 0; i<this._curcheckL.length;i++){
-                brickX = this._curcheckL[i].getCol();
-                brickY = this._curcheckL[i].getRow();
-                this.blockDic[brickX.toString()+brickY].setBlockInfo(new data.BlockInfo(brickX,brickY,1));
-            }
-        }
+
 
 
         //检测碰撞
@@ -79,6 +71,10 @@ module view.map
                         break;
                     case "down":
                         isHit = this.checkCell(brickX,brickY+1,'hitD');
+                        //触底
+                        if(isHit) {
+                            this.floor();
+                        }
                         break;
                     default :
                         break;
@@ -90,6 +86,22 @@ module view.map
             }
 
             return isHit
+        }
+
+        private floor():void{
+            this._curABlockInfo.setIsDie(true);
+            this.updateToScene();
+            this._curABlockInfo.destroy();
+        }
+
+        //砖块模型里的形状更新到场景中
+        private  updateToScene():void{
+            var brickX = 0,brickY = 0;
+            for(var i:number = 0; i<this._curcheckL.length;i++){
+                brickX = this._curcheckL[i].getCol();
+                brickY = this._curcheckL[i].getRow();
+                this.blockDic[brickX.toString()+brickY].block = 1;
+            }
         }
 
         //检测该单元格是否可以移动
@@ -106,6 +118,7 @@ module view.map
                     }
                     break;
                 case "hitD":
+                    console.log(i);
                     if(i>= config.GameConfig.MAP_MAX_ROW){
                         return true;
                     }
