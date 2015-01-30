@@ -124,8 +124,43 @@ module view.map
             this._curABlockInfo.setIsDie(true);
             this.updateToScene();
             this._curABlockInfo.destroy();
-
+            this.checkLine();
             this.createBrick();
+            this.checkGameOver();//j检测游戏结束
+        }
+
+        //检测消除行
+        private checkLine():void{
+            var canClear:boolean = false;
+            for(var i:number = config.GameConfig.MAP_MAX_ROW; i>=0; i--){
+                canClear = true;
+                for(var j:number = 0; j<config.GameConfig.MAP_MAX_COL; j++){
+                    if(this.blockDic[i.toString()+j].block !=1){
+                        canClear = false;
+                        break;
+                    }
+                }
+                if(canClear){
+                    this.clearLine(i);
+                    i++;
+                }
+            }
+        }
+
+        //消除行操作
+        private clearLine(index:number):void{
+            for(var j:number = 0; j<config.GameConfig.MAP_MAX_COL; j++){
+                this.blockDic[index.toString()+j].block = 0;
+            }
+
+            for(var i:number = index-1; i>=0; i--){
+                for(var j:number = 0; j<config.GameConfig.MAP_MAX_COL; j++){
+                    if(this.blockDic[i.toString()+j].block == 1){
+                        this.blockDic[(i+1).toString()+j].block = 1;
+                        this.blockDic[i.toString()+j].block = 0;
+                    }
+                }
+            }
         }
 
         //砖块模型里的形状更新到场景中
@@ -153,6 +188,22 @@ module view.map
                 case config.GameConfig.DIR_DOWN:
 
                     break;
+            }
+        }
+
+        //检测游戏结束
+        private checkGameOver():void{
+            var isLost:boolean = false;
+            for(var i:number = 3; i >= 0; i--){
+                for(var j:number = 0; j<config.GameConfig.MAP_MAX_COL;j++){
+                    if(this.blockDic[i.toString()+j].block == 1){
+                        isLost = true;
+                    }
+                }
+            }
+
+            if(isLost){
+                // gameOver 重新开始
             }
         }
 
