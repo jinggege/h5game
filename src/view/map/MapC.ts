@@ -92,7 +92,7 @@ module view.map
                     }
                     break;
                 case "hitD":
-                    if(i>= config.GameConfig.STAGE_MAIN_WIDTH){
+                    if(i>= config.GameConfig.MAP_MAX_ROW){
                         return true;
                     }
                     break;
