@@ -9,7 +9,6 @@ module data{
         private _currentType:string   = "";
         private _ablockMap:Array<any> = null;
         private _isDie:boolean = false;
-        private _point:egret.Point;
 
         private _body:egret.Sprite;
 
@@ -20,7 +19,6 @@ module data{
 
 
         public constructor(){
-            this._point = new egret.Point(0,0);
             this._body  = new egret.Sprite();
 
             this._checkList = new Array<data.CheckPoint>();
@@ -108,15 +106,7 @@ module data{
         public updata():void{
             if(this._isDie) return;
             this._body.y+= this._speedY;
-        }
 
-
-        /**
-         * 全局坐标
-         * @returns {Point}
-         */
-        public getGlobalPoint():egret.Point{
-            return this._point;
         }
 
 
@@ -170,9 +160,22 @@ module data{
 
 
         public destroy():void{
-            //todo
-        }
+            if(this.getBody().parent != null && this.getBody().parent != undefined){
+                this._isDie = true;
+                this.getBody().parent.removeChild(this.getBody());
+                this._body = null;
+            }
 
+            if(this._checkList!= null  ){
+                while(this._checkList.length){
+                    this._checkList[0] = null;
+                    this._checkList.splice(0,1);
+                }
+            }
+
+            this._ablockMap  = null;
+
+        }
 
 
 
