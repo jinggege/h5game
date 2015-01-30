@@ -36,7 +36,6 @@ module data{
         }
 
         public setABlockMap(value:Array<any>):void{
-
             this._ablockMap = value;
             this.creatBlockMap();
         }

@@ -76,6 +76,7 @@ module data
 
         /**
          * 创建Active Block
+         * 创建不同方块 接口
          * @returns {data.ActiveBlockInfo}
          */
 
@@ -83,6 +84,7 @@ module data
 
             var aBlock:data.ActiveBlockInfo = new data.ActiveBlockInfo();
             aBlock.setActiveBlockType(data.MapData.A_TYPE_田);
+            console.log(this.getActiceMapData(data.MapData.A_TYPE_田))
             aBlock.setABlockMap(this.getActiceMapData(data.MapData.A_TYPE_田));
             return aBlock;
         }
@@ -102,7 +104,7 @@ module data
 
             switch(aType){
                 case data.MapData.A_TYPE_田 :
-                    return this.mapTian;
+                    return this.mapTian();
                     break;
 
                 default :
