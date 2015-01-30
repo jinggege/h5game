@@ -14,6 +14,9 @@ module data{
         private _body:egret.Sprite;
 
         private _checkList:Array<data.CheckPoint>;
+        private _speedX:number = 30;
+        private _speedY:number = 30;
+
 
 
         public constructor(){
@@ -100,10 +103,12 @@ module data{
         }
 
 
-
-
+        /**
+         * 每帧更新
+         */
         public updata():void{
             if(this._isDie) return;
+            this._body.y+= this._speedY;
         }
 
 
