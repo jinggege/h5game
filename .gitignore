@@ -1,6 +1,7 @@
 *.swp
 .idea/
 bin-debug/
+bin-debug/src/game_file_list.js
 launcher/
 libs/
 .DS_Store
