@@ -10,6 +10,8 @@ module data
         public static A_TYPE_田:string  = "田";
         public static A_TYPE_T_1:string = "T_1";
         public static A_TYPE_T_2:string = "T_2";
+        public static A_TYPE_T_3:string = "T_3";
+        public static A_TYPE_T_4:string = "T_4";
 
         private _blockMapTian:Array<Array> =null;
         private _blockMapT_1:Array<Array>  = null;
@@ -30,6 +32,15 @@ module data
                     break;
                 case data.MapConfig.A_TYPE_T_1:
                     return this.blockMapT_1();
+                    break;
+                case data.MapConfig.A_TYPE_T_2:
+                    return this.blockMapT_2();
+                    break;
+                case data.MapConfig.A_TYPE_T_3:
+                    return this.blockMapT_3();
+                    break;
+                case data.MapConfig.A_TYPE_T_4:
+                    return this.blockMapT_4();
                     break;
             }
 
