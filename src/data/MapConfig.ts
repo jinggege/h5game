@@ -13,6 +13,9 @@ module data
 
         private _blockMapTian:Array<Array> =null;
         private _blockMapT_1:Array<Array>  = null;
+        private _blockMapT_2:Array<Array>  = null;
+        private _blockMapT_3:Array<Array>  = null;
+        private _blockMapT_4:Array<Array>  = null;
 
         public constructor(){
 
@@ -46,7 +49,11 @@ module data
             return this._blockMapTian;
         }
 
-
+        /**
+         *  E
+         * EEE
+         * @returns {Array<Array>}
+         */
         private blockMapT_1():Array{
             if(this._blockMapT_1 != null)
             {
@@ -59,10 +66,68 @@ module data
             return this._blockMapT_1;
         }
 
+        /**
+         *E
+         *EE
+         *E
+         * @returns {Array<Array>}
+         */
+
         private blockMapT_2():Array{
-            //todo
-            return null;
+            if(this._blockMapT_2 != null)
+            {
+                return this._blockMapT_2;
+            }
+
+            this._blockMapT_2 = [];
+            this._blockMapT_2.push([this.getPoint(0,0,1), this.getPoint(0,1,0)]);
+            this._blockMapT_2.push([this.getPoint(1,0,1), this.getPoint(1,1,1)]);
+            this._blockMapT_2.push([this.getPoint(2,0,1), this.getPoint(2,1,0)]);
+            return this._blockMapT_2;
         }
+
+
+        /**
+         * EEE
+         *  E
+         * @returns {Array<Array>}
+         */
+        private blockMapT_3():Array{
+            if(this._blockMapT_3 != null)
+            {
+                return this._blockMapT_3;
+            }
+
+            this._blockMapT_3 = [];
+            this._blockMapT_3.push([this.getPoint(0,0,1), this.getPoint(0,1,1),this.getPoint(0,2,1)]);
+            this._blockMapT_3.push([this.getPoint(1,0,0), this.getPoint(1,1,1),this.getPoint(1,2,0)]);
+            return this._blockMapT_3;
+        }
+
+
+
+        /**
+         *  E
+         * EE
+         *  E
+         * @returns {Array<Array>}
+         */
+
+        private blockMapT_4():Array{
+            if(this._blockMapT_4 != null)
+            {
+                return this._blockMapT_4;
+            }
+
+            this._blockMapT_4 = [];
+            this._blockMapT_4.push([this.getPoint(0,0,0), this.getPoint(0,1,1)]);
+            this._blockMapT_4.push([this.getPoint(1,0,1), this.getPoint(1,1,1)]);
+            this._blockMapT_4.push([this.getPoint(2,0,0), this.getPoint(2,1,1)]);
+            return this._blockMapT_4;
+        }
+
+
+
 
 
 
