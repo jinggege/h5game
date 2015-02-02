@@ -10,6 +10,8 @@ module view.map
         private _curTime:number = 0;
         private _lastTime:number = 0;
         private _delay:number = 500;
+        //当前移动类型
+        private moveType:string = "down";
 
         static _self:MapC ;
         public constructor(){
@@ -80,7 +82,7 @@ module view.map
                         isHit = this.checkCell(brickRow,brickCol+1,'hitR');
                         break;
                     case "down":
-
+                        util.Console.log(['-----',brickRow, brickCol]);
                         isHit = this.checkCell(brickRow+1,brickCol,'hitD');
                         //触底
                         if(isHit) {
@@ -184,29 +186,28 @@ module view.map
         }
 
         private changeDirctionHandler(event:mevent.NoticeData):void{
-            var moveType = "down"
             var isHit = false;
             switch (event.data){
                 case config.GameConfig.DIR_LEFT:
-                    moveType = "left";
-                    isHit = MapC._self.checkHit(moveType);
+                    this.moveType = "left";
+                    isHit = MapC._self.checkHit(this.moveType);
                     if(!isHit){
                         MapC._self._curABlockInfo.setDirLeft();
                     }
                     break;
                 case config.GameConfig.DIR_RIGT:
-                    moveType = "right";
-                    isHit = MapC._self.checkHit(moveType);
+                    this.moveType = "right";
+                    isHit = MapC._self.checkHit(this.moveType);
                     if(!isHit){
                         MapC._self._curABlockInfo.setDirRight();
                     }
                     break;
                 case config.GameConfig.DIR_TURN:
-                    moveType = "turn";
+                    this.moveType = "turn";
                     break;
                 case config.GameConfig.DIR_DOWN:
-                    moveType = 'down';
-                    isHit = MapC._self.checkHit(moveType);
+                    this.moveType = 'down';
+                    isHit = MapC._self.checkHit(this.moveType);
                     break;
             }
 
