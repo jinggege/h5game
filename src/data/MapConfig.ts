@@ -14,7 +14,7 @@ module data
         public static A_TYPE_T_3:string = "T_3";
         public static A_TYPE_T_4:string = "T_4";
 
-        private _blockMapTian:Array<any> =null;
+        private _blockMapTian:Array<any> = null;
         private _blockMapT_1:Array<any>  = null;
         private _blockMapT_2:Array<any>  = null;
         private _blockMapT_3:Array<any>  = null;

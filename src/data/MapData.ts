@@ -102,9 +102,12 @@ module data
             var randomIndex:number = Math.floor(this._blockList.length * Math.random());
             var blockType:string =this._blockList[randomIndex];
 
+            var blockData:any = this.getActiceMapData(blockType);
+            this._currOwnCol = blockData[0].length;
+
             var aBlock:data.ActiveBlockInfo = new data.ActiveBlockInfo();
             aBlock.setActiveBlockType(blockType);
-            aBlock.setABlockMap(this.getActiceMapData(blockType));
+            aBlock.setABlockMap(blockData);
             var randomCol:number = Math.floor((config.GameConfig.MAP_MAX_COL - this._currOwnCol) *Math.random());
             var randomX:number  = randomCol * config.GameConfig.BLOCK_WIDTH;
             aBlock.setXY(randomX,0);
