@@ -23,14 +23,17 @@ module data
 
         public constructor(){
             this._blockConfig = new data.MapConfig();
-            this._blockList = new Array<string>();
+            this._blockList   = new Array<string>();
 
             this._blockList.push(data.MapConfig.A_TYPE_田);
+
             this._blockList.push(data.MapConfig.A_TYPE_T_1);
             this._blockList.push(data.MapConfig.A_TYPE_T_2);
             this._blockList.push(data.MapConfig.A_TYPE_T_3);
             this._blockList.push(data.MapConfig.A_TYPE_T_4);
 
+            this._blockList.push(data.MapConfig.A_TYPE_Z_1);
+            this._blockList.push(data.MapConfig.A_TYPE_Z_2);
         }
 
 
