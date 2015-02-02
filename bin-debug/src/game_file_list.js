@@ -15,6 +15,7 @@ var game_file_list = [
     "config/UIKey.js",
     "data/ActiveBlockInfo.js",
     "data/BlockInfo.js",
+    "data/MapConfig.js",
     "config/DataModuleKey.js",
     "data/MapData.js",
     "view/background/BackgroundC.js",

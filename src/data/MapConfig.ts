@@ -8,16 +8,18 @@ module data
 
         /**方块类型*/
         public static A_TYPE_田:string  = "田";
+
         public static A_TYPE_T_1:string = "T_1";
         public static A_TYPE_T_2:string = "T_2";
         public static A_TYPE_T_3:string = "T_3";
         public static A_TYPE_T_4:string = "T_4";
 
-        private _blockMapTian:Array<Array> =null;
-        private _blockMapT_1:Array<Array>  = null;
-        private _blockMapT_2:Array<Array>  = null;
-        private _blockMapT_3:Array<Array>  = null;
-        private _blockMapT_4:Array<Array>  = null;
+        private _blockMapTian:Array<any> =null;
+        private _blockMapT_1:Array<any>  = null;
+        private _blockMapT_2:Array<any>  = null;
+        private _blockMapT_3:Array<any>  = null;
+        private _blockMapT_4:Array<any>  = null;
+
 
         public constructor(){
 
@@ -25,7 +27,7 @@ module data
 
 
 
-        public getBlockMapByType(blocyType:string):Array{
+        public getBlockMapByType(blocyType:string):any{
             switch (blocyType){
                 case data.MapConfig.A_TYPE_田:
                     return this.blockMapTian();
@@ -48,7 +50,7 @@ module data
         }
 
 
-        private blockMapTian():Array{
+        private blockMapTian():any{
             if(this._blockMapTian != null)
             {
                 return this._blockMapTian;
@@ -65,7 +67,7 @@ module data
          * EEE
          * @returns {Array<Array>}
          */
-        private blockMapT_1():Array{
+        private blockMapT_1():any{
             if(this._blockMapT_1 != null)
             {
                 return this._blockMapT_1;
@@ -84,7 +86,7 @@ module data
          * @returns {Array<Array>}
          */
 
-        private blockMapT_2():Array{
+        private blockMapT_2():any{
             if(this._blockMapT_2 != null)
             {
                 return this._blockMapT_2;
@@ -103,7 +105,7 @@ module data
          *  E
          * @returns {Array<Array>}
          */
-        private blockMapT_3():Array{
+        private blockMapT_3():any{
             if(this._blockMapT_3 != null)
             {
                 return this._blockMapT_3;
@@ -116,7 +118,6 @@ module data
         }
 
 
-
         /**
          *  E
          * EE
@@ -124,7 +125,7 @@ module data
          * @returns {Array<Array>}
          */
 
-        private blockMapT_4():Array{
+        private blockMapT_4():any{
             if(this._blockMapT_4 != null)
             {
                 return this._blockMapT_4;
@@ -136,9 +137,6 @@ module data
             this._blockMapT_4.push([this.getPoint(2,0,0), this.getPoint(2,1,1)]);
             return this._blockMapT_4;
         }
-
-
-
 
 
 

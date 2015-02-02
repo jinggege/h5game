@@ -12,11 +12,25 @@ module data
         private _mapDic:Object;
 
         private  _map_tian:any = null;
-
         /**当前活动的块 占有的列数*/
-        private  _currOwnCol:number = 0;
+        private  _currOwnCol:number = 3;
+
+        private _blockConfig:data.MapConfig;
+
+        private _blockList:Array<string> = null;
+
+
 
         public constructor(){
+            this._blockConfig = new data.MapConfig();
+            this._blockList = new Array<string>();
+
+            this._blockList.push(data.MapConfig.A_TYPE_田);
+            this._blockList.push(data.MapConfig.A_TYPE_T_1);
+            this._blockList.push(data.MapConfig.A_TYPE_T_2);
+            this._blockList.push(data.MapConfig.A_TYPE_T_3);
+            this._blockList.push(data.MapConfig.A_TYPE_T_4);
+
         }
 
 
@@ -84,9 +98,13 @@ module data
          */
 
         public creatActiveBlock():data.ActiveBlockInfo{
+
+            var randomIndex:number = Math.floor(this._blockList.length * Math.random());
+            var blockType:string =this._blockList[randomIndex];
+
             var aBlock:data.ActiveBlockInfo = new data.ActiveBlockInfo();
-            aBlock.setActiveBlockType(data.MapData.A_TYPE_田);
-            aBlock.setABlockMap(this.getActiceMapData(data.MapData.A_TYPE_田));
+            aBlock.setActiveBlockType(blockType);
+            aBlock.setABlockMap(this.getActiceMapData(blockType));
             var randomCol:number = Math.floor((config.GameConfig.MAP_MAX_COL - this._currOwnCol) *Math.random());
             var randomX:number  = randomCol * config.GameConfig.BLOCK_WIDTH;
             aBlock.setXY(randomX,0);
@@ -105,41 +123,9 @@ module data
          * @returns {*}
          */
         private getActiceMapData(aType:string):any{
-
-            switch(aType){
-                case data.MapData.A_TYPE_田 :
-                    return this.mapTian();
-                    break;
-
-                default :
-                    util.Console.log([aType+": 无此类型的地图!"]);
-                    return null;
-                    break;
-            }
-
-
-            return null;
+            return this._blockConfig.getBlockMapByType(aType);
         }
 
-
-        private mapTian():Object{
-            if(this._map_tian != null)
-            {
-                return this._map_tian;
-            }
-
-            this._map_tian = [];
-            this._map_tian.push([this.getPoint(0,0,1), this.getPoint(0,1,1)]);
-            this._map_tian.push([this.getPoint(1,0,1), this.getPoint(1,1,1)]);
-
-            this._currOwnCol = 2;
-            return this._map_tian;
-        }
-
-
-        private getPoint(row:number,col:number,block:number):data.ABlockPoint{
-            return new data.ABlockPoint(row,col,block);
-        }
 
 
 
